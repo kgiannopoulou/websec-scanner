@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>WebSec Scanner Report — https://kgiannopoulou.github.io/website-portfolio/</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 960px; margin: 2rem auto; padding: 0 1rem; color: #1a1a1a; }
+  h1 { font-size: 1.4rem; }
+  .score { font-size: 1.1rem; margin-bottom: 1.5rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  th, td { border: 1px solid #ddd; padding: 0.5rem; text-align: left; vertical-align: top; }
+  th { background: #f5f5f5; }
+  tr.sev-high { background: #fdecea; }
+  tr.sev-medium { background: #fff8e1; }
+  tr.sev-low { background: #e8f4fd; }
+  tr.sev-info { background: #f5f5f5; }
+</style>
+</head>
+<body>
+  <h1>WebSec Scanner Report</h1>
+  <p><strong>Target:</strong> https://kgiannopoulou.github.io/website-portfolio/<br>
+     <strong>Scanned:</strong> 2026-09-10T16:50:57.294Z</p>
+  <p class="score"><strong>Score:</strong> 84/100 (grade B)</p>
+  <table>
+    <thead><tr><th>Severity</th><th>Check</th><th>Title</th><th>Detail</th><th>Recommendation</th></tr></thead>
+    <tbody><tr class="sev-medium">
+        <td>MEDIUM</td>
+        <td>headers</td>
+        <td>Missing security header: content-security-policy</td>
+        <td>The response did not include a 'content-security-policy' header.</td>
+        <td>Add a Content-Security-Policy header to restrict which scripts, styles, and resources the browser may load, mitigating XSS and data-injection attacks.</td>
+      </tr>
+<tr class="sev-low">
+        <td>LOW</td>
+        <td>headers</td>
+        <td>Missing security header: x-content-type-options</td>
+        <td>The response did not include a 'x-content-type-options' header.</td>
+        <td>Add 'X-Content-Type-Options: nosniff' to stop browsers from MIME-sniffing responses away from the declared Content-Type.</td>
+      </tr>
+<tr class="sev-medium">
+        <td>MEDIUM</td>
+        <td>headers</td>
+        <td>Missing security header: x-frame-options</td>
+        <td>The response did not include a 'x-frame-options' header.</td>
+        <td>Add 'X-Frame-Options: DENY' or 'SAMEORIGIN' (or a frame-ancestors CSP directive) to prevent clickjacking via iframes.</td>
+      </tr>
+<tr class="sev-low">
+        <td>LOW</td>
+        <td>headers</td>
+        <td>Missing security header: referrer-policy</td>
+        <td>The response did not include a 'referrer-policy' header.</td>
+        <td>Add a 'Referrer-Policy' header (e.g. 'strict-origin-when-cross-origin') to avoid leaking full URLs to third-party sites via the Referer header.</td>
+      </tr>
+<tr class="sev-info">
+        <td>INFO</td>
+        <td>headers</td>
+        <td>Missing security header: permissions-policy</td>
+        <td>The response did not include a 'permissions-policy' header.</td>
+        <td>Add a 'Permissions-Policy' header to explicitly disable browser features (camera, microphone, geolocation, etc.) your site doesn't use.</td>
+      </tr>
+<tr class="sev-low">
+        <td>LOW</td>
+        <td>info-disclosure</td>
+        <td>'server' header discloses server technology</td>
+        <td>server: GitHub.com</td>
+        <td>Suppress or genericize the 'server' header at the server/proxy level so specific software versions aren't advertised to attackers scoping for known exploits.</td>
+      </tr></tbody>
+  </table>
+</body>
+</html>

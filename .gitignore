@@ -1,0 +1,5 @@
+node_modules/
+dist/
+*.log
+*.json.report
+*.html.report

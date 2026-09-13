@@ -1,0 +1,50 @@
+{
+  "target": "https://kgiannopoulou.github.io/website-portfolio/",
+  "scannedAt": "2026-09-10T16:50:57.290Z",
+  "score": 84,
+  "grade": "B",
+  "findings": [
+    {
+      "check": "headers",
+      "severity": "medium",
+      "title": "Missing security header: content-security-policy",
+      "detail": "The response did not include a 'content-security-policy' header.",
+      "recommendation": "Add a Content-Security-Policy header to restrict which scripts, styles, and resources the browser may load, mitigating XSS and data-injection attacks."
+    },
+    {
+      "check": "headers",
+      "severity": "low",
+      "title": "Missing security header: x-content-type-options",
+      "detail": "The response did not include a 'x-content-type-options' header.",
+      "recommendation": "Add 'X-Content-Type-Options: nosniff' to stop browsers from MIME-sniffing responses away from the declared Content-Type."
+    },
+    {
+      "check": "headers",
+      "severity": "medium",
+      "title": "Missing security header: x-frame-options",
+      "detail": "The response did not include a 'x-frame-options' header.",
+      "recommendation": "Add 'X-Frame-Options: DENY' or 'SAMEORIGIN' (or a frame-ancestors CSP directive) to prevent clickjacking via iframes."
+    },
+    {
+      "check": "headers",
+      "severity": "low",
+      "title": "Missing security header: referrer-policy",
+      "detail": "The response did not include a 'referrer-policy' header.",
+      "recommendation": "Add a 'Referrer-Policy' header (e.g. 'strict-origin-when-cross-origin') to avoid leaking full URLs to third-party sites via the Referer header."
+    },
+    {
+      "check": "headers",
+      "severity": "info",
+      "title": "Missing security header: permissions-policy",
+      "detail": "The response did not include a 'permissions-policy' header.",
+      "recommendation": "Add a 'Permissions-Policy' header to explicitly disable browser features (camera, microphone, geolocation, etc.) your site doesn't use."
+    },
+    {
+      "check": "info-disclosure",
+      "severity": "low",
+      "title": "'server' header discloses server technology",
+      "detail": "server: GitHub.com",
+      "recommendation": "Suppress or genericize the 'server' header at the server/proxy level so specific software versions aren't advertised to attackers scoping for known exploits."
+    }
+  ]
+}
