@@ -1,0 +1,399 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "websec-scanner",
+          "version": "1.1.0",
+          "informationUri": "https://github.com/kgiannopoulou/websec-scanner",
+          "rules": [
+            {
+              "id": "WSS-HDR-001",
+              "name": "MissingContentSecurityPolicy",
+              "shortDescription": {
+                "text": "Missing Content-Security-Policy"
+              },
+              "helpUri": "https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html",
+              "properties": {
+                "tags": [
+                  "security",
+                  "A05:2021 Security Misconfiguration",
+                  "CWE-693"
+                ]
+              }
+            },
+            {
+              "id": "WSS-HDR-002",
+              "name": "MissingStrictTransportSecurity",
+              "shortDescription": {
+                "text": "Missing Strict-Transport-Security"
+              },
+              "helpUri": "https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html",
+              "properties": {
+                "tags": [
+                  "security",
+                  "A05:2021 Security Misconfiguration",
+                  "CWE-319"
+                ]
+              }
+            },
+            {
+              "id": "WSS-HDR-003",
+              "name": "MissingorinvalidXContentTypeOptions",
+              "shortDescription": {
+                "text": "Missing or invalid X-Content-Type-Options"
+              },
+              "helpUri": "https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html#x-content-type-options",
+              "properties": {
+                "tags": [
+                  "security",
+                  "A05:2021 Security Misconfiguration",
+                  "CWE-693"
+                ]
+              }
+            },
+            {
+              "id": "WSS-HDR-004",
+              "name": "Missingclickjackingprotection",
+              "shortDescription": {
+                "text": "Missing clickjacking protection"
+              },
+              "helpUri": "https://cheatsheetseries.owasp.org/cheatsheets/Clickjacking_Defense_Cheat_Sheet.html",
+              "properties": {
+                "tags": [
+                  "security",
+                  "A05:2021 Security Misconfiguration",
+                  "CWE-1021"
+                ]
+              }
+            },
+            {
+              "id": "WSS-HDR-005",
+              "name": "MissingReferrerPolicy",
+              "shortDescription": {
+                "text": "Missing Referrer-Policy"
+              },
+              "helpUri": "https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html#referrer-policy",
+              "properties": {
+                "tags": [
+                  "security",
+                  "A05:2021 Security Misconfiguration",
+                  "CWE-200"
+                ]
+              }
+            },
+            {
+              "id": "WSS-HDR-006",
+              "name": "MissingPermissionsPolicy",
+              "shortDescription": {
+                "text": "Missing Permissions-Policy"
+              },
+              "helpUri": "https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html#permissions-policy-formerly-feature-policy",
+              "properties": {
+                "tags": [
+                  "security",
+                  "A05:2021 Security Misconfiguration",
+                  "CWE-693"
+                ]
+              }
+            },
+            {
+              "id": "WSS-COOKIE-001",
+              "name": "Cookiemissingsecurityattributes",
+              "shortDescription": {
+                "text": "Cookie missing security attributes"
+              },
+              "helpUri": "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#cookies",
+              "properties": {
+                "tags": [
+                  "security",
+                  "A05:2021 Security Misconfiguration",
+                  "CWE-1004",
+                  "CWE-614",
+                  "CWE-1275"
+                ]
+              }
+            },
+            {
+              "id": "WSS-TLS-001",
+              "name": "SitenotservedoverHTTPS",
+              "shortDescription": {
+                "text": "Site not served over HTTPS"
+              },
+              "helpUri": "https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html",
+              "properties": {
+                "tags": [
+                  "security",
+                  "A02:2021 Cryptographic Failures",
+                  "CWE-319"
+                ]
+              }
+            },
+            {
+              "id": "WSS-TLS-002",
+              "name": "OutdatedTLSprotocol",
+              "shortDescription": {
+                "text": "Outdated TLS protocol"
+              },
+              "helpUri": "https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html#only-support-strong-protocols",
+              "properties": {
+                "tags": [
+                  "security",
+                  "A02:2021 Cryptographic Failures",
+                  "CWE-327"
+                ]
+              }
+            },
+            {
+              "id": "WSS-TLS-003",
+              "name": "TLScertificateexpired",
+              "shortDescription": {
+                "text": "TLS certificate expired"
+              },
+              "helpUri": "https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html",
+              "properties": {
+                "tags": [
+                  "security",
+                  "A02:2021 Cryptographic Failures",
+                  "CWE-298"
+                ]
+              }
+            },
+            {
+              "id": "WSS-TLS-004",
+              "name": "TLScertificateexpiringsoon",
+              "shortDescription": {
+                "text": "TLS certificate expiring soon"
+              },
+              "helpUri": "https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html",
+              "properties": {
+                "tags": [
+                  "security",
+                  "A02:2021 Cryptographic Failures",
+                  "CWE-298"
+                ]
+              }
+            },
+            {
+              "id": "WSS-TLS-005",
+              "name": "TLScertificatenottrusted",
+              "shortDescription": {
+                "text": "TLS certificate not trusted"
+              },
+              "helpUri": "https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html#use-strong-cryptographic-hashing-algorithms",
+              "properties": {
+                "tags": [
+                  "security",
+                  "A02:2021 Cryptographic Failures",
+                  "CWE-295"
+                ]
+              }
+            },
+            {
+              "id": "WSS-FILE-001",
+              "name": "Sensitivefilepubliclyaccessible",
+              "shortDescription": {
+                "text": "Sensitive file publicly accessible"
+              },
+              "helpUri": "https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/02-Configuration_and_Deployment_Management_Testing/04-Review_Old_Backup_and_Unreferenced_Files_for_Sensitive_Information",
+              "properties": {
+                "tags": [
+                  "security",
+                  "A05:2021 Security Misconfiguration",
+                  "CWE-538"
+                ]
+              }
+            },
+            {
+              "id": "WSS-CORS-001",
+              "name": "CORSwildcardoriginwithcredentials",
+              "shortDescription": {
+                "text": "CORS wildcard origin with credentials"
+              },
+              "helpUri": "https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/11-Client-side_Testing/07-Testing_Cross_Origin_Resource_Sharing",
+              "properties": {
+                "tags": [
+                  "security",
+                  "A05:2021 Security Misconfiguration",
+                  "CWE-942"
+                ]
+              }
+            },
+            {
+              "id": "WSS-CORS-002",
+              "name": "CORSreflectsarbitraryOrigin",
+              "shortDescription": {
+                "text": "CORS reflects arbitrary Origin"
+              },
+              "helpUri": "https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/11-Client-side_Testing/07-Testing_Cross_Origin_Resource_Sharing",
+              "properties": {
+                "tags": [
+                  "security",
+                  "A05:2021 Security Misconfiguration",
+                  "CWE-942"
+                ]
+              }
+            },
+            {
+              "id": "WSS-INFO-001",
+              "name": "Servertechnologydisclosedinheaders",
+              "shortDescription": {
+                "text": "Server technology disclosed in headers"
+              },
+              "helpUri": "https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/01-Information_Gathering/02-Fingerprint_Web_Server",
+              "properties": {
+                "tags": [
+                  "security",
+                  "A05:2021 Security Misconfiguration",
+                  "CWE-200"
+                ]
+              }
+            },
+            {
+              "id": "WSS-SCAN-001",
+              "name": "Checkcouldnotcomplete",
+              "shortDescription": {
+                "text": "Check could not complete"
+              },
+              "properties": {
+                "tags": [
+                  "security"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true,
+          "endTimeUtc": "2026-10-21T08:50:18.719Z"
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "WSS-HDR-001",
+          "level": "warning",
+          "message": {
+            "text": "Missing security header: content-security-policy. The response did not include a 'content-security-policy' header. Fix: Add a Content-Security-Policy header to restrict which scripts, styles, and resources the browser may load, mitigating XSS and data-injection attacks."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "https://kgiannopoulou.github.io/website-portfolio/"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "medium",
+            "security-severity": "5.5"
+          }
+        },
+        {
+          "ruleId": "WSS-HDR-003",
+          "level": "note",
+          "message": {
+            "text": "Missing security header: x-content-type-options. The response did not include a 'x-content-type-options' header. Fix: Add 'X-Content-Type-Options: nosniff' to stop browsers from MIME-sniffing responses away from the declared Content-Type."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "https://kgiannopoulou.github.io/website-portfolio/"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "low",
+            "security-severity": "3.0"
+          }
+        },
+        {
+          "ruleId": "WSS-HDR-004",
+          "level": "warning",
+          "message": {
+            "text": "Missing security header: x-frame-options. The response did not include a 'x-frame-options' header. Fix: Add 'X-Frame-Options: DENY' or 'SAMEORIGIN' (or a frame-ancestors CSP directive) to prevent clickjacking via iframes."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "https://kgiannopoulou.github.io/website-portfolio/"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "medium",
+            "security-severity": "5.5"
+          }
+        },
+        {
+          "ruleId": "WSS-HDR-005",
+          "level": "note",
+          "message": {
+            "text": "Missing security header: referrer-policy. The response did not include a 'referrer-policy' header. Fix: Add a 'Referrer-Policy' header (e.g. 'strict-origin-when-cross-origin') to avoid leaking full URLs to third-party sites via the Referer header."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "https://kgiannopoulou.github.io/website-portfolio/"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "low",
+            "security-severity": "3.0"
+          }
+        },
+        {
+          "ruleId": "WSS-HDR-006",
+          "level": "note",
+          "message": {
+            "text": "Missing security header: permissions-policy. The response did not include a 'permissions-policy' header. Fix: Add a 'Permissions-Policy' header to explicitly disable browser features (camera, microphone, geolocation, etc.) your site doesn't use."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "https://kgiannopoulou.github.io/website-portfolio/"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "info",
+            "security-severity": "0.0"
+          }
+        },
+        {
+          "ruleId": "WSS-INFO-001",
+          "level": "note",
+          "message": {
+            "text": "'server' header discloses server technology. server: GitHub.com Fix: Suppress or genericize the 'server' header at the server/proxy level so specific software versions aren't advertised to attackers scoping for known exploits."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "https://kgiannopoulou.github.io/website-portfolio/"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "severity": "low",
+            "security-severity": "3.0"
+          }
+        }
+      ]
+    }
+  ]
+}

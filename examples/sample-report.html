@@ -4,12 +4,13 @@
 <meta charset="utf-8">
 <title>WebSec Scanner Report — https://kgiannopoulou.github.io/website-portfolio/</title>
 <style>
-  body { font-family: system-ui, sans-serif; max-width: 960px; margin: 2rem auto; padding: 0 1rem; color: #1a1a1a; }
+  body { font-family: system-ui, sans-serif; max-width: 1100px; margin: 2rem auto; padding: 0 1rem; color: #1a1a1a; }
   h1 { font-size: 1.4rem; }
   .score { font-size: 1.1rem; margin-bottom: 1.5rem; }
   table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
   th, td { border: 1px solid #ddd; padding: 0.5rem; text-align: left; vertical-align: top; }
   th { background: #f5f5f5; }
+  tr.sev-critical { background: #f8d0cc; }
   tr.sev-high { background: #fdecea; }
   tr.sev-medium { background: #fff8e1; }
   tr.sev-low { background: #e8f4fd; }
@@ -19,51 +20,57 @@
 <body>
   <h1>WebSec Scanner Report</h1>
   <p><strong>Target:</strong> https://kgiannopoulou.github.io/website-portfolio/<br>
-     <strong>Scanned:</strong> 2026-09-10T16:50:57.294Z</p>
+     <strong>Scanned:</strong> 2026-10-21T08:50:18.718Z</p>
   <p class="score"><strong>Score:</strong> 84/100 (grade B)</p>
   <table>
-    <thead><tr><th>Severity</th><th>Check</th><th>Title</th><th>Detail</th><th>Recommendation</th></tr></thead>
+    <thead><tr><th>Severity</th><th>Rule</th><th>Title</th><th>Detail</th><th>Recommendation</th><th>OWASP / CWE</th></tr></thead>
     <tbody><tr class="sev-medium">
         <td>MEDIUM</td>
-        <td>headers</td>
+        <td><code>WSS-HDR-001</code></td>
         <td>Missing security header: content-security-policy</td>
         <td>The response did not include a 'content-security-policy' header.</td>
         <td>Add a Content-Security-Policy header to restrict which scripts, styles, and resources the browser may load, mitigating XSS and data-injection attacks.</td>
-      </tr>
-<tr class="sev-low">
-        <td>LOW</td>
-        <td>headers</td>
-        <td>Missing security header: x-content-type-options</td>
-        <td>The response did not include a 'x-content-type-options' header.</td>
-        <td>Add 'X-Content-Type-Options: nosniff' to stop browsers from MIME-sniffing responses away from the declared Content-Type.</td>
+        <td>A05:2021 Security Misconfiguration<br>CWE-693<br><a href="https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html">reference</a></td>
       </tr>
 <tr class="sev-medium">
         <td>MEDIUM</td>
-        <td>headers</td>
+        <td><code>WSS-HDR-004</code></td>
         <td>Missing security header: x-frame-options</td>
         <td>The response did not include a 'x-frame-options' header.</td>
         <td>Add 'X-Frame-Options: DENY' or 'SAMEORIGIN' (or a frame-ancestors CSP directive) to prevent clickjacking via iframes.</td>
+        <td>A05:2021 Security Misconfiguration<br>CWE-1021<br><a href="https://cheatsheetseries.owasp.org/cheatsheets/Clickjacking_Defense_Cheat_Sheet.html">reference</a></td>
       </tr>
 <tr class="sev-low">
         <td>LOW</td>
-        <td>headers</td>
+        <td><code>WSS-HDR-003</code></td>
+        <td>Missing security header: x-content-type-options</td>
+        <td>The response did not include a 'x-content-type-options' header.</td>
+        <td>Add 'X-Content-Type-Options: nosniff' to stop browsers from MIME-sniffing responses away from the declared Content-Type.</td>
+        <td>A05:2021 Security Misconfiguration<br>CWE-693<br><a href="https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html#x-content-type-options">reference</a></td>
+      </tr>
+<tr class="sev-low">
+        <td>LOW</td>
+        <td><code>WSS-HDR-005</code></td>
         <td>Missing security header: referrer-policy</td>
         <td>The response did not include a 'referrer-policy' header.</td>
         <td>Add a 'Referrer-Policy' header (e.g. 'strict-origin-when-cross-origin') to avoid leaking full URLs to third-party sites via the Referer header.</td>
-      </tr>
-<tr class="sev-info">
-        <td>INFO</td>
-        <td>headers</td>
-        <td>Missing security header: permissions-policy</td>
-        <td>The response did not include a 'permissions-policy' header.</td>
-        <td>Add a 'Permissions-Policy' header to explicitly disable browser features (camera, microphone, geolocation, etc.) your site doesn't use.</td>
+        <td>A05:2021 Security Misconfiguration<br>CWE-200<br><a href="https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html#referrer-policy">reference</a></td>
       </tr>
 <tr class="sev-low">
         <td>LOW</td>
-        <td>info-disclosure</td>
+        <td><code>WSS-INFO-001</code></td>
         <td>'server' header discloses server technology</td>
         <td>server: GitHub.com</td>
         <td>Suppress or genericize the 'server' header at the server/proxy level so specific software versions aren't advertised to attackers scoping for known exploits.</td>
+        <td>A05:2021 Security Misconfiguration<br>CWE-200<br><a href="https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/01-Information_Gathering/02-Fingerprint_Web_Server">reference</a></td>
+      </tr>
+<tr class="sev-info">
+        <td>INFO</td>
+        <td><code>WSS-HDR-006</code></td>
+        <td>Missing security header: permissions-policy</td>
+        <td>The response did not include a 'permissions-policy' header.</td>
+        <td>Add a 'Permissions-Policy' header to explicitly disable browser features (camera, microphone, geolocation, etc.) your site doesn't use.</td>
+        <td>A05:2021 Security Misconfiguration<br>CWE-693<br><a href="https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html#permissions-policy-formerly-feature-policy">reference</a></td>
       </tr></tbody>
   </table>
 </body>

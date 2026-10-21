@@ -1,4 +1,5 @@
-import { fetchSafe } from "../http.js";
+import { fetchChain } from "../http.js";
+import { RULES, finding } from "../rules.js";
 import type { CheckFn, Finding } from "../types.js";
 
 function parseCookieName(setCookieLine: string): string {
@@ -6,43 +7,47 @@ function parseCookieName(setCookieLine: string): string {
   return eq === -1 ? setCookieLine.trim() : setCookieLine.slice(0, eq).trim();
 }
 
+/** Attribute names present on a Set-Cookie line (the part after the first ';'). */
+function cookieAttributes(setCookieLine: string): Set<string> {
+  return new Set(
+    setCookieLine
+      .split(";")
+      .slice(1)
+      .map((part) => part.split("=")[0].trim().toLowerCase())
+  );
+}
+
 export const cookiesCheck: CheckFn = async (ctx) => {
   const findings: Finding[] = [];
-  const res = await fetchSafe(ctx.targetUrl.toString(), {}, ctx.timeoutMs);
-  if (!res) return findings;
+  // Login flows often set cookies on a redirect, so inspect every hop.
+  const chain = await fetchChain(ctx, ctx.targetUrl.toString());
+  const seen = new Set<string>();
 
-  // undici (Node's fetch) exposes multiple Set-Cookie headers via getSetCookie().
-  const headersWithGetSetCookie = res.headers as Headers & {
-    getSetCookie?: () => string[];
-  };
-  const rawCookies: string[] =
-    typeof headersWithGetSetCookie.getSetCookie === "function"
-      ? headersWithGetSetCookie.getSetCookie()
-      : (() => {
-          const single = res.headers.get("set-cookie");
-          return single ? [single] : [];
-        })();
+  for (const res of chain) {
+    const isHttps = new URL(res.url).protocol === "https:";
+    for (const raw of res.headers.getSetCookie()) {
+      const name = parseCookieName(raw);
+      if (seen.has(name)) continue;
+      seen.add(name);
 
-  const isHttps = ctx.targetUrl.protocol === "https:";
+      const attrs = cookieAttributes(raw);
+      const missing: string[] = [];
+      if (!attrs.has("httponly")) missing.push("HttpOnly");
+      if (isHttps && !attrs.has("secure")) missing.push("Secure");
+      if (!attrs.has("samesite")) missing.push("SameSite");
+      if (missing.length === 0) continue;
 
-  for (const raw of rawCookies) {
-    const name = parseCookieName(raw);
-    const lower = raw.toLowerCase();
-    const missing: string[] = [];
-
-    if (!lower.includes("httponly")) missing.push("HttpOnly");
-    if (isHttps && !lower.includes("secure")) missing.push("Secure");
-    if (!lower.includes("samesite")) missing.push("SameSite");
-
-    if (missing.length > 0) {
-      findings.push({
-        check: "cookies",
-        severity: missing.includes("HttpOnly") || missing.includes("Secure") ? "medium" : "low",
-        title: `Cookie '${name}' missing attribute(s): ${missing.join(", ")}`,
-        detail: `Set-Cookie header: ${raw}`,
-        recommendation:
-          "Set HttpOnly on cookies that don't need JS access (mitigates XSS-based theft), Secure so cookies are only sent over HTTPS, and SameSite=Lax/Strict to reduce CSRF exposure.",
-      });
+      findings.push(
+        finding(RULES.cookieAttributes, {
+          check: "cookies",
+          severity: missing.includes("HttpOnly") || missing.includes("Secure") ? "medium" : "low",
+          title: `Cookie '${name}' missing attribute(s): ${missing.join(", ")}`,
+          detail: `Set-Cookie header: ${raw}`,
+          recommendation:
+            "Set HttpOnly on cookies that don't need JS access (mitigates XSS-based theft), Secure so cookies are only sent over HTTPS, and SameSite=Lax/Strict to reduce CSRF exposure.",
+          url: res.url,
+        })
+      );
     }
   }
 
